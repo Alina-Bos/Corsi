@@ -2,7 +2,7 @@
 # Corsi Block Tapping Task
 ## Introduction
 This project contains an implementation of the Programming Project of Group 14 of module Human Factors and Engineering Psychology. 
-<p>Contributors to this project is Alina Maximova.
+<p>Contributor to this project is Alina Maximova.
 <p>This implementation contains several files:</p>
 <p>1. Block.py -- contains the class defining a block and its properties and functions</p>
 <p>2. game.py -- contains the executable program for running the Corsi Task with a user</p>
