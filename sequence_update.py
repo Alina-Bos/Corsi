@@ -13,6 +13,7 @@ from numpy import genfromtxt
 
 #importing the predefined class with block
 from Block import Block
+from screens import Screens
 
 class Sequence:
     '''Sequence class defines the main functions that will be used by a sequence'''
@@ -24,6 +25,7 @@ class Sequence:
         self.i = i
         self.sequence = []
         self.dict = dict()
+        self.screens = Screens()
 
     def create_sequence(self): #creating sequences
         '''this method creates one of four standard sequences depending on the given parameter i'''
@@ -201,12 +203,14 @@ class Sequence:
 
     def draw_sequence_human(self, screen, event):
         '''this method draws the sequence made by a user'''
+        #redrawing the screen
+        #screen.fill((255,255,255))
+
         for block in self.sequence:
             block.clicked(screen, event)
 
     def draw_sequence_comp(self, screen):
         '''this method draws the sequence which user will need to repeat'''
-
         #first showing user the blocks themselves
         for block in self.sequence:
             block.draw_block(screen)
@@ -225,7 +229,6 @@ class Sequence:
         #waiting 2 seconds to allow user see all the blocks
         time.sleep(2)
         print('')
-   
         #changing color back to black
         for block in self.sequence:
             block.pressed = False

@@ -9,15 +9,54 @@ import pygame
 from sequence_update import Sequence
 from user_sequence import detect_block_ID
 from save import filelog
+from screens import Screens
 
 def main():
     '''This is the body of the main executable program'''
+    #flag - variable for working with screens
+    flag = True
+
+    #insert the number of the participant
+    user_input = input("Insert your number here: ")
+    print(f'User number is {user_input}')
+    
     #defining the screen parameters
     pygame.init()
     width = 1000
     height = 800
     pygame.display.set_mode((width, height))
     screen = pygame.display.get_surface()
+    screen.fill((255,255,255))
+
+    #adding screens
+    screens = Screens()
+    screens.welcome_screen(screen, user_input)
+    
+    #transition to the next screen
+    while flag:
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                screens.show_instructions(screen)
+                flag = False
+
+    flag = True
+
+    #transition to the next screen
+    while flag:
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                screens.rules_of_use(screen)
+                flag = False
+
+    flag = True
+
+    #transition to the next screen
+    while flag:
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                flag = False
+    flag = True
+    #redrawing the screen
     screen.fill((255,255,255))
 
     #creating the first sequence
@@ -71,6 +110,16 @@ def main():
     #counting the errors made by the user with this sequence
     err1 = sequence1.compare_sequences(user_seq)
 
+    #transition to the next screen
+    screens.intermadiate_screen(screen, round(seq1time, 2), sequence1.compare_sequences_length(user_seq), err1)
+
+    #transition to the next screen
+    while flag:
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                flag = False
+
+    flag = True
     #redrawing the screen
     screen.fill((255,255,255))
 
@@ -121,7 +170,16 @@ def main():
             max_length = sequence2.compare_sequences_length(user_seq)
     #counting the errors made by the user with this sequence
     err2 = sequence2.compare_sequences(user_seq)
+    #transition to the next screen
+    screens.intermadiate_screen(screen, round(seq2time, 2), sequence2.compare_sequences_length(user_seq), err2)
 
+    #transition to the next screen
+    while flag:
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                flag = False
+
+    flag = True
     #redrawing the screen
     screen.fill((255,255,255))
 
@@ -171,7 +229,16 @@ def main():
             max_length = sequence3.compare_sequences_length(user_seq)
     #counting the errors made by the user with this sequence
     err3 = sequence3.compare_sequences(user_seq)
+    #transition to the next screen
+    screens.intermadiate_screen(screen, round(seq3time, 2), sequence3.compare_sequences_length(user_seq), err3)
 
+    #transition to the next screen
+    while flag:
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                flag = False
+
+    flag = True
     #redrawing the screen
     screen.fill((255,255,255))
 
@@ -227,8 +294,26 @@ def main():
     #minus the number of errors made by the user in all four sequences
     final_score = len(sequence1.sequence) + len(sequence2.sequence) + len(sequence3.sequence) + len(sequence4.sequence) - err1 - err2 - err3 - err4
 
+    #transition to the next screen
+    screens.final_screen(screen, max_length, round(seq1time, 2), round(seq2time, 2), round(seq3time, 2), round(seq4time, 2), final_score)
+    #transition to the next screen
+    while flag:
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                flag = False
+
+    flag = True
     #saving results to file
-    filelog(1007, max_length, seq1time, seq2time, seq3time, seq4time, final_score)
+    filelog(user_input, max_length, seq1time, seq2time, seq3time, seq4time, final_score)
+    #transition to the next screen
+    screens.goodbye_screen(screen)
+    while flag:
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                flag = False
+
+    flag = True
+
     pygame.quit()
 
 
