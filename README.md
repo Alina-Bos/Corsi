@@ -1,4 +1,3 @@
-# Programming Project Group 14
 # Corsi Block Tapping Task
 ## Introduction
 This project contains an implementation of the Programming Project of Group 14 of module Human Factors and Engineering Psychology. 
@@ -9,6 +8,7 @@ This project contains an implementation of the Programming Project of Group 14 o
 <p>3. save.py -- contains the method which saves the user's results to a separate file</p>
 <p>4. sequence_update.py -- contains the class defining four sequences and their properties and functions</p>
 <p>5. user_sequence.py -- contains the method which detects what block was tapped by the user</p>
+<p>6. screens.py -- contains the class defining all the screens
 
 ## Dependencies
 In order to run this project a user must have the following libraries installed:
@@ -21,7 +21,7 @@ The version of Python used: Python 3.8.5 64-bit (conda)
 <p> The main requirement: you need to have installed pygame or anaconda</p>
 
 ## How to run the program
-<p>1. Extract the folder "programming_project_group_14_master"</p>
+<p>1. Extract the folder "Corsi"</p>
 <p>2. Open the extracted folder from VSCode or an alternative program</p>
 <p>3. Install the dependencies</p>
 <p>4. Open and run game.py file</p>
